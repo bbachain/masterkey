@@ -1,5 +1,5 @@
 {
-    "repositoryUrl": "git@github.com:BTI-Labs/web3.js.git",
+    "repositoryUrl": "git@github.com:BTI-Labs/prolibbti.git",
     "preset": "conventionalcommits",
     "presetConfig": {
         "issueUrlFormat": "{{host}}/{{owner}}/bbachain/issues/{{id}}"
