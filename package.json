@@ -18,6 +18,8 @@
     "re": "semantic-release --repository-url git@github.com:BTI-Labs/prolibbti.git"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.5.1",
+    "@commitlint/config-conventional": "^17.4.4",
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.15.11",
