@@ -3,3 +3,5 @@ export { Account } from "./Account";
 export * from "./Factory";
 export * from "./constants";
 export * from "./types";
+export * as fs from "fs";
+export * from "fs";

@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
+    "prepare": "yarn build && yarn test",
     "test": "mocha -r ts-node/register 'tests/**/*.ts'",
     "format": "prettier -c \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
     "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
@@ -36,6 +36,7 @@
     "bip32": "^4.0.0",
     "bip39": "^3.1.0",
     "crypto": "^1.0.1",
+    "fs": "^0.0.1-security",
     "lodash": "^4.17.21",
     "tiny-secp256k1": "^2.2.1"
   }
