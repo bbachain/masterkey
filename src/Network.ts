@@ -1,4 +1,4 @@
-import { INetwork } from "./types";
+import {INetwork} from './types';
 
 export class Network implements INetwork {
   /**
@@ -23,10 +23,10 @@ export class Network implements INetwork {
 
   /**
    * The contructor of Network
-   * @param name 
-   * @param symbol 
-   * @param decimal 
-   * @param type 
+   * @param name
+   * @param symbol
+   * @param decimal
+   * @param type
    */
   constructor(name: string, symbol: string, decimal: number, type: number) {
     this.name = name;

@@ -1,6 +1,7 @@
-import BIP32Factory, { BIP32Interface } from 'bip32';
+import BIP32Factory, {BIP32Interface} from 'bip32';
 import * as ecc from 'tiny-secp256k1';
-import { Network } from './Network';
+import {Network} from './Network';
+import {Account} from './Account';
 
 const bip32 = BIP32Factory(ecc);
 
@@ -40,11 +41,13 @@ export class MasterKey {
     const buffer = Buffer.from(this.seed, 'hex');
     const root: BIP32Interface = bip32.fromSeed(buffer);
     const derived = root.derivePath(path);
-    return {
-      xprv: derived.toBase58(),
-      xpub: derived.neutered().toBase58(),
-      fingerprint: derived.fingerprint.toString('hex'),
-      depth: derived.depth,
-    }
+
+    return new Account(
+      network,
+      derived,
+      derived.neutered(),
+      derived.fingerprint,
+      derived.depth,
+    );
   }
 }

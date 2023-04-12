@@ -1,4 +1,4 @@
-export const wordsCountToStrength = (count: 12 | 15| 18| 21 | 24) => {
+export const wordsCountToStrength = (count: 12 | 15 | 18 | 21 | 24) => {
   let strength = 0;
   switch (count) {
     case 15:

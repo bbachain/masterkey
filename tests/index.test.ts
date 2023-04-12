@@ -11,14 +11,19 @@ describe('Should be a valid mnemonic words count', async () => {
     const element = wordsCount[index];
     let masterKey: MasterKey = await create(`Master Key ${index + 1}`, element);
 
-    it(`should be a valid mnemonic words count` , async () => {
-      expect(element).to.equal(masterKey.mnemonic.split(" ").length);
+    it(`should be a valid mnemonic words count`, async () => {
+      expect(element).to.equal(masterKey.mnemonic.split(' ').length);
     });
 
-    it(`should be a valid derive key` , async () => {
+    it(`should be a valid derive key`, async () => {
       const account = masterKey.derive(DNETWORK);
       // const address = account.toAddress();
-      console.log(`Created Account`, account);
+      console.log(`Created Account`, {
+        ...account,
+        xprv: account.xprv.toBase58(),
+        xpub: account.xpub.toBase58(),
+        address: account.toAddress(),
+      });
     });
   }
 });
