@@ -1,42 +1,38 @@
 import {BIP32Interface} from 'bip32';
-import * as ethUtil from 'ethereumjs-util';
 import {INetwork} from './types';
+import {
+  AccountBBA,
+  AccountBSC,
+  AccountETH,
+  AccountTRX,
+  IChainAccount,
+} from './chains';
 
 export class Account {
   network: INetwork;
-  xprv: BIP32Interface;
-  xpub: BIP32Interface;
-  fingerprint: Buffer;
-  depth: number;
+  account: IChainAccount;
 
-  constructor(
-    network: INetwork,
-    xprv: BIP32Interface,
-    xpub: BIP32Interface,
-    fingerprint: Buffer,
-    depth: number,
-  ) {
-    this.fingerprint = fingerprint;
+  constructor(network: INetwork, xprv: BIP32Interface) {
     this.network = network;
-    this.depth = depth;
-    this.xprv = xprv;
-    this.xpub = xpub;
+    switch (this.network.symbol) {
+      case 'BBA':
+        this.account = new AccountBBA(xprv.neutered(), xprv);
+        break;
+      case 'BSC':
+        this.account = new AccountBSC(xprv.neutered(), xprv);
+        break;
+      case 'ETH':
+        this.account = new AccountETH(xprv.neutered(), xprv);
+        break;
+      case 'TRX':
+        this.account = new AccountTRX(xprv.neutered(), xprv);
+        break;
+      default:
+        throw Error('Unsupport network');
+    }
   }
 
   public toAddress() {
-    switch (this.network.symbol) {
-      case 'BBA':
-        break;
-      case 'BSC':
-      case 'ETH':
-        const pubKey = ethUtil.privateToPublic(this.xprv.privateKey);
-        const addr = ethUtil.publicToAddress(pubKey).toString('hex');
-        return ethUtil.toChecksumAddress(addr);
-      case 'TRX':
-        break;
-      default:
-        break;
-    }
-    return null;
+    return this.account.toAddress();
   }
 }

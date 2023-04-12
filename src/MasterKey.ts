@@ -40,14 +40,6 @@ export class MasterKey {
     const path = `m/44'/${network.type}'/0'/0`;
     const buffer = Buffer.from(this.seed, 'hex');
     const root: BIP32Interface = bip32.fromSeed(buffer);
-    const derived = root.derivePath(path);
-
-    return new Account(
-      network,
-      derived,
-      derived.neutered(),
-      derived.fingerprint,
-      derived.depth,
-    );
+    return new Account(network, root.derivePath(path));
   }
 }

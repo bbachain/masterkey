@@ -1,6 +1,6 @@
 import * as mocha from 'mocha';
 import * as chai from 'chai';
-import {DNETWORK, create} from '../src/index';
+import {NETWORKS, create} from '../src/index';
 import {MasterKey} from '../src/MasterKey';
 
 const expect = chai.expect;
@@ -16,14 +16,16 @@ describe('Should be a valid mnemonic words count', async () => {
     });
 
     it(`should be a valid derive key`, async () => {
-      const account = masterKey.derive(DNETWORK);
-      // const address = account.toAddress();
-      console.log(`Created Account`, {
-        ...account,
-        xprv: account.xprv.toBase58(),
-        xpub: account.xpub.toBase58(),
-        address: account.toAddress(),
-      });
+      const account = masterKey.derive(NETWORKS[1]);
+      const address = account.toAddress();
+      console.log(address);
+
+      // console.log(`Created Account`, {
+      //   ...account,
+      //   xprv: account.xprv.toBase58(),
+      //   xpub: account.xpub.toBase58(),
+      //   address: account.toAddress(),
+      // });
     });
   }
 });
