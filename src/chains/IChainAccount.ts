@@ -8,4 +8,9 @@ export interface IChainAccount {
    * get account address
    */
   toAddress: () => string;
+
+  /**
+   * validate account address
+   */
+  validateAddress: () => boolean;
 }

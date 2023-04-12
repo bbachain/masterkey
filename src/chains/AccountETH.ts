@@ -18,4 +18,9 @@ export class AccountETH implements IChainAccount {
   public toAddress() {
     return '0x' + this.wallet.getAddress().toString('hex');
   }
+
+  // TODO
+  public validateAddress() {
+    return true;
+  }
 }

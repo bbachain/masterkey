@@ -35,4 +35,8 @@ export class Account {
   public toAddress() {
     return this.account.toAddress();
   }
+
+  public validateAddress() {
+    return this.account.validateAddress();
+  }
 }
