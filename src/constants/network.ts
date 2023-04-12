@@ -1,31 +1,12 @@
+import { Network } from "../Network";
 import { INetwork } from "../types";
 
 export const getAll = () => {
     const networks: INetwork[] = [
-        {
-            name: 'BBAChain',
-            symbol: 'BBA',
-            decimals: 9,
-            path: 1999,
-        },
-        {
-            name: 'Ethereum',
-            symbol: 'ETH',
-            decimals: 18,
-            path: 60,
-        },
-        {
-            name: 'Binance Smart Chain',
-            symbol: 'BSC',
-            decimals: 18,
-            path: 60,
-        },
-        {
-            name: 'TRON',
-            symbol: 'TRX',
-            decimals: 6,
-            path: 195,
-        },
+        new Network('BBACHAIN', 'BBA',  9, 829),
+        new Network('Ethereum', 'ETH', 18,  60),
+        new Network('BSC'     , 'BSC', 18,  60),
+        new Network('TRON'    , 'TRX',  6, 195),
     ]
 
     return networks;

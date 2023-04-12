@@ -13,6 +13,7 @@ export const create = async (name: string, words: 12 | 15| 18| 21 | 24) => {
 };
 
 export { Account } from "./Account";
+export { Network } from "./Network";
 export * from "./Factory";
 export * from "./constants";
 export * from "./types";
