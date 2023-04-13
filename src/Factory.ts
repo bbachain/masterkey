@@ -1,7 +1,19 @@
 import * as bip39 from 'bip39';
-import BIP32Factory, {BIP32Interface} from 'bip32';
 import * as ecc from 'tiny-secp256k1';
+import BIP32Factory, {BIP32Interface} from 'bip32';
+import {v4 as uuid} from 'uuid';
+
+import { MasterKey } from './MasterKey';
+import { wordsCountToStrength } from './utils';
+
 const bip32 = BIP32Factory(ecc);
+
+export const create = async (name: string, words: 12 | 15 | 18 | 21 | 24) => {
+  const id: string = uuid();
+  const mnemonic = bip39.generateMnemonic(wordsCountToStrength(words));
+  const seed = await bip39.mnemonicToSeed(mnemonic);
+  return new MasterKey(id, name, mnemonic, seed.toString('hex'));
+};
 
 /**
  *
