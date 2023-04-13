@@ -3,6 +3,7 @@ import {v4 as uuid} from 'uuid';
 
 import {MasterKey} from './MasterKey';
 import {wordsCountToStrength} from './utils';
+import {IMasterKey} from './types';
 
 /**
  * Create a new masterkey
@@ -15,4 +16,8 @@ export const create = async (name: string, words: 12 | 15 | 18 | 21 | 24) => {
   const mnemonic = bip39.generateMnemonic(wordsCountToStrength(words));
   const seed = await bip39.mnemonicToSeed(mnemonic);
   return new MasterKey(id, name, mnemonic, seed.toString('hex'));
+};
+
+export const asignMasterKey = (obj: IMasterKey) => {
+  return new MasterKey(obj.id, obj.name, obj.mnemonic, obj.seed);
 };
