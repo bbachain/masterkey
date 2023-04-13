@@ -9,7 +9,10 @@ const wordsCount: any = [12, 15, 18, 21, 24];
 describe('Should be a valid mnemonic words count', async () => {
   for (let index = 0; index < wordsCount.length; index++) {
     const element = wordsCount[index];
-    const masterKey: MasterKey = await create(`Master Key ${index + 1}`, element);
+    const masterKey: MasterKey = await create(
+      `Master Key ${index + 1}`,
+      element,
+    );
 
     it(`should be a valid mnemonic ${element} words`, async () => {
       expect(element).to.equal(masterKey.mnemonic.split(' ').length);

@@ -21,5 +21,5 @@ export class AccountBBA implements IChainAccount {
 
   public validateAddress() {
     return bbaWeb3.PublicKey.isOnCurve(this.toAddress());
-  };
+  }
 }
