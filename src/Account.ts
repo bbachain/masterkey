@@ -1,5 +1,5 @@
 import {BIP32Interface} from 'bip32';
-import {INetwork} from './types';
+
 import {
   AccountBBA,
   AccountBSC,
@@ -7,6 +7,7 @@ import {
   AccountTRX,
   IChainAccount,
 } from './chains';
+import {INetwork} from './types';
 
 export class Account {
   network: INetwork;

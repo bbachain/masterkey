@@ -2,6 +2,6 @@
   "repositoryUrl": "git@github.com:BTI-Labs/prolibbti.git",
   "preset": "conventionalcommits",
   "presetConfig": {
-    "issueUrlFormat": "{{host}}/{{owner}}/bbachain/issues/{{id}}"
+    "issueUrlFormat": "{{host}}/{{owner}}/BTI-Labs/issues/{{id}}"
   }
 }

@@ -1,6 +1,5 @@
 import {BIP32Interface} from 'bip32';
-import {Keypair} from '@bbachain/web3.js';
-import * as bbaWeb3 from '@bbachain/web3.js';
+import {Keypair, PublicKey} from '@bbachain/web3.js';
 import {IChainAccount} from './IChainAccount';
 
 export class AccountBBA implements IChainAccount {
@@ -20,6 +19,6 @@ export class AccountBBA implements IChainAccount {
   }
 
   public validateAddress() {
-    return bbaWeb3.PublicKey.isOnCurve(this.toAddress());
+    return PublicKey.isOnCurve(this.toAddress());
   }
 }
