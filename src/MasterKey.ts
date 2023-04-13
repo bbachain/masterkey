@@ -1,11 +1,12 @@
-import BIP32Factory, {BIP32Interface} from 'bip32';
 import * as ecc from 'tiny-secp256k1';
+import BIP32Factory, {BIP32Interface} from 'bip32';
 import {Network} from './Network';
 import {Account} from './Account';
+import {IMasterKey} from './types';
 
 const bip32 = BIP32Factory(ecc);
 
-export class MasterKey {
+export class MasterKey implements IMasterKey {
   /**
    * The id of master key
    */
@@ -26,6 +27,18 @@ export class MasterKey {
    */
   mnemonic: string;
 
+  /**
+   * The verified status of master key
+   */
+  verified?: boolean;
+
+  /**
+   * Contructor
+   * @param id
+   * @param name
+   * @param mnemonic
+   * @param seed
+   */
   constructor(id: string, name: string, mnemonic: string, seed: string) {
     this.id = id;
     this.name = name;
