@@ -1,11 +1,14 @@
 import {BIP32Interface} from 'bip32';
 import Wallet from 'ethereumjs-wallet';
+import Web3 from 'web3';
+
 import {IChainAccount} from './IChainAccount';
 
 export class AccountETH implements IChainAccount {
   xpub: BIP32Interface;
   xprv?: BIP32Interface;
   wallet: Wallet;
+  web3: Web3;
 
   constructor(xpub: BIP32Interface, xprv?: BIP32Interface) {
     this.xpub = xpub;
@@ -13,14 +16,18 @@ export class AccountETH implements IChainAccount {
     this.wallet = this.xprv
       ? Wallet.fromExtendedPrivateKey(this.xprv.toBase58())
       : Wallet.fromExtendedPublicKey(this.xpub.toBase58());
+    this.web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+  }
+
+  public toPrivateKey() {
+    return this.wallet.getPrivateKey().toString('hex');
   }
 
   public toAddress() {
-    return '0x' + this.wallet.getAddress().toString('hex');
+    return this.wallet.getChecksumAddressString();
   }
 
-  // TODO
-  public validateAddress() {
-    return true;
+  public validateAddress(address: string) {
+    return this.web3.utils.isAddress(address);
   }
 }

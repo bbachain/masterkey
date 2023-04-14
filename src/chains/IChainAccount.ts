@@ -4,6 +4,11 @@ export interface IChainAccount {
   xpub: BIP32Interface;
   xprv?: BIP32Interface;
 
+  /**\
+   * get account private key
+   */
+  toPrivateKey: () => string;
+
   /**
    * get account address
    */
@@ -12,5 +17,5 @@ export interface IChainAccount {
   /**
    * validate account address
    */
-  validateAddress: () => boolean;
+  validateAddress: (address: string) => boolean;
 }

@@ -14,11 +14,15 @@ export class AccountBBA implements IChainAccount {
     this.keypair = Keypair.fromSeed(this.xprv.privateKey);
   }
 
+  public toPrivateKey() {
+    return this.keypair.secretKey.toString();
+  }
+
   public toAddress() {
     return this.keypair.publicKey.toBase58();
   }
 
-  public validateAddress() {
-    return PublicKey.isOnCurve(this.toAddress());
+  public validateAddress(address: string) {
+    return PublicKey.isOnCurve(new PublicKey(address));
   }
 }

@@ -33,11 +33,15 @@ export class Account {
     }
   }
 
+  public toPrivateKey() {
+    return this.account.toPrivateKey();
+  }
+
   public toAddress() {
     return this.account.toAddress();
   }
 
-  public validateAddress() {
-    return this.account.validateAddress();
+  public validateAddress(address: string) {
+    return this.account.validateAddress(address);
   }
 }
