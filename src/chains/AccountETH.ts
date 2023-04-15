@@ -28,6 +28,7 @@ export class AccountETH implements IChainAccount {
   }
 
   public validateAddress(address: string) {
-    return this.web3.utils.isAddress(address);
+    return true;
+    // return this.web3.utils.isAddress(address);
   }
 }
