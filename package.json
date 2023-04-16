@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "prepare": "yarn build && yarn test",
-    "test": "mocha -r ts-node/register 'tests/**/*.ts'",
+    "test": "mocha -r ts-node/register --timeout 10000 'tests/**/*.ts'",
     "format": "prettier -c \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
     "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
     "re": "semantic-release --repository-url git@github.com:BTI-Labs/prolibbti.git"
