@@ -19,7 +19,7 @@ export class Account {
       case 'BBA':
         this.account = new AccountBBA(xprv.neutered(), xprv);
         break;
-      case 'BSC':
+      case 'BNB':
         this.account = new AccountBSC(xprv.neutered(), xprv);
         break;
       case 'ETH':

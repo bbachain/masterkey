@@ -1,5 +1,5 @@
 import TronWeb from 'tronweb';
-import { BIP32Interface } from 'bip32';
+import {BIP32Interface} from 'bip32';
 import {AccountETH} from './AccountETH';
 
 export class AccountTRX extends AccountETH {
@@ -8,7 +8,7 @@ export class AccountTRX extends AccountETH {
   constructor(xpub: BIP32Interface, xprv?: BIP32Interface) {
     super(xpub, xprv);
     this.tronWeb = new TronWeb({
-      fullHost: 'https://api.trongrid.io',
+      fullHost: 'https://api.shasta.trongrid.io',
     });
   }
 
@@ -16,9 +16,13 @@ export class AccountTRX extends AccountETH {
     const quick: boolean = true;
     if (!quick) {
       const privateKeyBuffer = this.xprv.privateKey;
-      const addressBytes = this.tronWeb.utils.crypto.getAddressFromPriKey(privateKeyBuffer);
-      const address = this.tronWeb.utils.crypto.getBase58CheckAddress(addressBytes);
-      return this.validateAddress(address) ? address : Error('Unsupport address');
+      const addressBytes =
+        this.tronWeb.utils.crypto.getAddressFromPriKey(privateKeyBuffer);
+      const address =
+        this.tronWeb.utils.crypto.getBase58CheckAddress(addressBytes);
+      return this.validateAddress(address)
+        ? address
+        : Error('Unsupport address');
     }
     return this.tronWeb.utils.crypto.pkToAddress(this.toPrivateKey());
   }
@@ -29,6 +33,7 @@ export class AccountTRX extends AccountETH {
 
   public async getBalance(address?: string) {
     const destAddr = address || this.toAddress();
-    return await this.tronWeb.trx.getBalance(destAddr);
+    const sunBalance = await this.tronWeb.trx.getBalance(destAddr);
+    return this.tronWeb.fromSun(sunBalance) / 1;
   }
 }

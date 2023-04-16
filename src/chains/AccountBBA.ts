@@ -1,16 +1,24 @@
 import {BIP32Interface} from 'bip32';
-import {Keypair, PublicKey} from '@bbachain/web3.js';
+import {
+  BBA_DALTON_UNIT,
+  Connection,
+  Keypair,
+  PublicKey,
+} from '@bbachain/web3.js';
 import {IChainAccount} from './IChainAccount';
 
 export class AccountBBA implements IChainAccount {
+  base: number;
   xpub: BIP32Interface;
   xprv?: BIP32Interface;
-
+  connection: Connection;
   keypair: Keypair;
 
   constructor(xpub: BIP32Interface, xprv: BIP32Interface) {
+    this.base = BBA_DALTON_UNIT;
     this.xpub = xpub;
     this.xprv = xprv;
+    this.connection = new Connection('https://api-testnet.bbachain.com');
     this.keypair = Keypair.fromSeed(this.xprv.privateKey);
   }
 
@@ -27,6 +35,8 @@ export class AccountBBA implements IChainAccount {
   }
 
   public async getBalance(address?: string) {
-    return await Promise.resolve(0);
+    const destAddr = address ? new PublicKey(address) : this.keypair.publicKey;
+    const daltonBalance = await this.connection.getBalance(destAddr);
+    return daltonBalance > 0 ? daltonBalance / this.base : 0;
   }
 }

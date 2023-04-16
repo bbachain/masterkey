@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import {AccountETH} from './AccountETH';
-import { BIP32Interface } from 'bip32';
+import {BIP32Interface} from 'bip32';
 
 export class AccountBSC extends AccountETH {
   constructor(xpub: BIP32Interface, xprv?: BIP32Interface) {

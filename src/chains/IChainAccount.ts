@@ -1,6 +1,7 @@
 import {BIP32Interface} from 'bip32';
 
 export interface IChainAccount {
+  base: number;
   xpub: BIP32Interface;
   xprv?: BIP32Interface;
 
