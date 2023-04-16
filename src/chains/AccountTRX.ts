@@ -26,4 +26,9 @@ export class AccountTRX extends AccountETH {
   public validateAddress(address: string) {
     return this.tronWeb.utils.crypto.isAddressValid(address);
   }
+
+  public async getBalance(address?: string) {
+    const destAddr = address || this.toAddress();
+    return await this.tronWeb.trx.getBalance(destAddr);
+  }
 }

@@ -50,7 +50,7 @@ export class MasterKey implements IMasterKey {
    * Derive master key to child key via blockchain
    */
   public derive(network: Network) {
-    const path = `m/44'/${network.type}'/0'/0`;
+    const path = `m/44'/${network.type}'/0'/0/0`;
     const buffer = Buffer.from(this.seed, 'hex');
     const root: BIP32Interface = bip32.fromSeed(buffer);
     return new Account(network, root.derivePath(path));

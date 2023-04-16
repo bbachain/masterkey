@@ -25,4 +25,8 @@ export class AccountBBA implements IChainAccount {
   public validateAddress(address: string) {
     return PublicKey.isOnCurve(new PublicKey(address));
   }
+
+  public async getBalance(address?: string) {
+    return await Promise.resolve(0);
+  }
 }

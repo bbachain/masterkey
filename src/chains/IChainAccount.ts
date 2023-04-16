@@ -18,4 +18,9 @@ export interface IChainAccount {
    * validate account address
    */
   validateAddress: (address: string) => boolean;
+
+  /**
+   * get address balance
+   */
+  getBalance: (address?: string) => Promise<number>;
 }

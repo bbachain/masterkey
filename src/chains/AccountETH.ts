@@ -1,12 +1,12 @@
+import Web3 from 'web3';
 import {BIP32Interface} from 'bip32';
 import Wallet from 'ethereumjs-wallet';
-import Web3 from 'web3';
-
 import {IChainAccount} from './IChainAccount';
 
 export class AccountETH implements IChainAccount {
   xpub: BIP32Interface;
   xprv?: BIP32Interface;
+  endpoint: string;
   wallet: Wallet;
   web3: Web3;
 
@@ -16,7 +16,8 @@ export class AccountETH implements IChainAccount {
     this.wallet = this.xprv
       ? Wallet.fromExtendedPrivateKey(this.xprv.toBase58())
       : Wallet.fromExtendedPublicKey(this.xpub.toBase58());
-    this.web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+    this.endpoint = 'https://goerli.infura.io/v3/e68e9eb0a4aa4c23840da2924a83b392';
+    this.web3 = new Web3(new Web3.providers.HttpProvider(this.endpoint));
   }
 
   public toPrivateKey() {
@@ -28,7 +29,13 @@ export class AccountETH implements IChainAccount {
   }
 
   public validateAddress(address: string) {
-    return true;
-    // return this.web3.utils.isAddress(address);
+    return this.web3.utils.isAddress(address);
+  }
+
+  public async getBalance(address?: string) {
+    let balance = '';
+    const destAddr = address || this.toAddress();
+    await this.web3.eth.getBalance(destAddr).then(value => balance = value);
+    return this.web3.utils.fromWei(balance, 'ether') as unknown as number;
   }
 }

@@ -44,4 +44,8 @@ export class Account {
   public validateAddress(address: string) {
     return this.account.validateAddress(address);
   }
+
+  public getBalance(address?: string) {
+    return this.account.getBalance(address);
+  }
 }
