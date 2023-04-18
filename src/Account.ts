@@ -48,4 +48,8 @@ export class Account {
   public getBalance(address?: string) {
     return this.account.getBalance(address);
   }
+
+  public getTransactions(address?: string) {
+    return this.account.getTransactions(address);
+  }
 }

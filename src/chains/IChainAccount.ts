@@ -24,4 +24,11 @@ export interface IChainAccount {
    * get address balance
    */
   getBalance: (address?: string) => Promise<number>;
+
+  /**
+   * get transactions
+   * @param address
+   * @returns
+   */
+  getTransactions: (address?: string) => any;
 }

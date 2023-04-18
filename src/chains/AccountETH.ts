@@ -40,4 +40,6 @@ export class AccountETH implements IChainAccount {
     await this.web3.eth.getBalance(destAddr).then(value => (balance = value));
     return (this.web3.utils.fromWei(balance, 'ether') as unknown as number) / 1;
   }
+
+  public getTransactions(address: string) {}
 }

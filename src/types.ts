@@ -39,3 +39,15 @@ export interface IMasterKey {
    */
   derive: (network: Network) => Account;
 }
+
+export interface IChainTransaction {
+  hash: string;
+  blockHash: string;
+  blockNumber: number;
+  destination: string;
+  source: string;
+  value: number;
+  fee: number;
+}
+
+export type TWorkCount = 12 | 15 | 18 | 21 | 24;
