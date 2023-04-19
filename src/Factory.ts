@@ -18,6 +18,15 @@ export const create = async (name: string, words: 12 | 15 | 18 | 21 | 24) => {
   return new MasterKey(id, name, mnemonic, seed.toString('hex'));
 };
 
+export const recovery = async (name: string, mnemonic: string) => {
+  if (bip39.validateMnemonic(mnemonic)) {
+    const id: string = uuid();
+    const seed = await bip39.mnemonicToSeed(mnemonic);
+    return new MasterKey(id, name, mnemonic, seed.toString('hex'));
+  }
+  return null;
+};
+
 export const asignMasterKey = (obj: IMasterKey) => {
   return new MasterKey(obj.id, obj.name, obj.mnemonic, obj.seed);
 };

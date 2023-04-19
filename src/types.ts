@@ -50,4 +50,4 @@ export interface IChainTransaction {
   fee: number;
 }
 
-export type TWorkCount = 12 | 15 | 18 | 21 | 24;
+export type TWordCount = 12 | 15 | 18 | 21 | 24;
