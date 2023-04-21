@@ -59,10 +59,7 @@ describe('Should be a recovery mnemonic', () => {
   });
 
   it(`should be a INVALID mnemonic recovery`, () => {
-    recovery(
-      'Master Key',
-      'basket actual',
-    ).then(masterKey => {
+    recovery('Master Key', 'basket actual').then(masterKey => {
       expect(masterKey).to.equal(null);
     });
   });

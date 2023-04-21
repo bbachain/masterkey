@@ -1,3 +1,4 @@
+import {BIP32Interface} from 'bip32';
 import {Account} from './Account';
 import {Network} from './Network';
 
@@ -38,6 +39,61 @@ export interface IMasterKey {
    * Derive master key to child key via blockchain
    */
   derive: (network: Network) => Account;
+}
+
+export interface IChainAccount {
+  base: number;
+  xpub: BIP32Interface;
+  xprv?: BIP32Interface;
+
+  /**\
+   * Get account private key
+   */
+  toPrivateKey: () => string;
+
+  /**
+   * Get account address
+   */
+  toAddress: () => string;
+
+  /**
+   * Validate address
+   */
+  validateAddress: (address: string) => boolean;
+
+  /**
+   * Get address balance
+   */
+  getBalance: (address?: string) => Promise<number>;
+
+  /**
+   * Get transactions
+   * @param address
+   * @returns
+   */
+  getTransactions: (address?: string) => any;
+
+  /**
+   * Create raw transaction
+   * @returns ChainTransaction
+   */
+  createTransaction: (address: string, amount: number) => Promise<any>;
+
+  /**
+   * Estimate max amounnt to transfer
+   *
+   * @param address
+   * @returns number
+   */
+  estimateMaxTransfer: (address: string) => Promise<number>;
+
+  /**
+   * Sign and send a transaction
+   *
+   * @param transaction
+   * @returns
+   */
+  sendTransaction: (transaction: any) => Promise<any>;
 }
 
 export interface IChainTransaction {

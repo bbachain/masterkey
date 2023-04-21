@@ -1,13 +1,16 @@
+import {subtract} from 'lodash';
 import {BIP32Interface} from 'bip32';
 import {
   BBA_DALTON_UNIT,
   Connection,
   Keypair,
   PublicKey,
+  SystemProgram,
+  Transaction,
   clusterApiUrl,
 } from '@bbachain/web3.js';
-import {IChainAccount} from './IChainAccount';
 import {ChainTransaction} from './ChainTransaction';
+import {IChainAccount} from '../types';
 
 export class AccountBBA implements IChainAccount {
   base: number;
@@ -20,7 +23,10 @@ export class AccountBBA implements IChainAccount {
     this.base = BBA_DALTON_UNIT;
     this.xpub = xpub;
     this.xprv = xprv;
-    this.connection = new Connection(clusterApiUrl('testnet', true));
+    this.connection = new Connection(
+      clusterApiUrl('testnet', true),
+      'confirmed',
+    );
     this.keypair = Keypair.fromSeed(this.xprv.privateKey);
   }
 
@@ -61,5 +67,41 @@ export class AccountBBA implements IChainAccount {
         t.meta.fee,
       );
     });
+  }
+
+  public async createTransaction(address: string, amount: number) {
+    const latestBlockhash = await this.connection.getLatestBlockhash();
+    const lastValidBlockHeight = latestBlockhash.lastValidBlockHeight;
+    const blockhash = latestBlockhash.blockhash;
+
+    return new Transaction({
+      feePayer: this.keypair.publicKey,
+      lastValidBlockHeight,
+      blockhash,
+    }).add(
+      SystemProgram.transfer({
+        fromPubkey: this.keypair.publicKey,
+        toPubkey: new PublicKey(address),
+        daltons: this.base * amount,
+      }),
+    );
+  }
+
+  public async getEstimatedFee(tx: Transaction) {
+    const estimatedFee = await tx.getEstimatedFee(this.connection);
+    return estimatedFee / this.base;
+  }
+
+  public async estimateMaxTransfer(address: string) {
+    const tx = await this.createTransaction(address, 0.000001);
+    const fee = await this.getEstimatedFee(tx);
+    const balance = await this.getBalance();
+    const estimated =
+      balance > fee ? subtract(balance * this.base, fee * this.base) : 0;
+    return estimated / this.base;
+  }
+
+  public async sendTransaction(tx: Transaction) {
+    return await this.connection.sendTransaction(tx, [this.keypair]);
   }
 }

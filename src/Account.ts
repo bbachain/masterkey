@@ -1,13 +1,7 @@
 import {BIP32Interface} from 'bip32';
 
-import {
-  AccountBBA,
-  AccountBSC,
-  AccountETH,
-  AccountTRX,
-  IChainAccount,
-} from './chains';
-import {INetwork} from './types';
+import {AccountBBA, AccountBSC, AccountETH, AccountTRX} from './chains';
+import {IChainAccount, INetwork} from './types';
 
 export class Account {
   network: INetwork;
@@ -51,5 +45,17 @@ export class Account {
 
   public getTransactions(address?: string) {
     return this.account.getTransactions(address);
+  }
+
+  public createTransaction(address: string, amount: number) {
+    return this.account.createTransaction(address, amount);
+  }
+
+  public estimateMaxTransfer(address: string) {
+    return this.account.estimateMaxTransfer(address);
+  }
+
+  public sendTransaction(tx: any) {
+    return this.account.sendTransaction(tx);
   }
 }

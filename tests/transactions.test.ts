@@ -4,7 +4,7 @@ import {NETWORKS, asignMasterKey} from '../src/index';
 
 const expect = chai.expect;
 
-describe('Should be valid address balance', async () => {
+describe('Should be valid address balance', () => {
   const masterKey = asignMasterKey({
     id: '123456',
     name: 'Master Key',
@@ -13,10 +13,38 @@ describe('Should be valid address balance', async () => {
       'stick antique gadget enter build accident report session eagle exhibit pizza boost',
   } as any);
 
-  // TODO
-  // it(`should be a valid derive address ${NETWORKS[0].name}`, async () => {
-  //   const account = masterKey.derive(NETWORKS[0]);
-  //   const transactions = await account.getTransactions();
-  //   console.log(transactions);
-  // });
+  it(`should be create a valid tx ${NETWORKS[0].name}`, async () => {
+    const account = masterKey.derive(NETWORKS[0]);
+    const address = account.toAddress();
+    const estimate = await account.estimateMaxTransfer(address);
+    const tx = await account.createTransaction(address, estimate);
+    const hash = await account.sendTransaction(tx);
+    expect(hash).to.be.a('string');
+  });
+
+  it(`should be create a valid tx ${NETWORKS[1].name}`, async () => {
+    const account = masterKey.derive(NETWORKS[1]);
+    const address = account.toAddress();
+    const estimate = await account.estimateMaxTransfer(address);
+    const tx = await account.createTransaction(address, estimate);
+    const hash = await account.sendTransaction(tx);
+    expect(hash).to.be.a('string');
+  });
+
+  it(`should be failure send rawTx ${NETWORKS[2].name}`, async () => {
+    const account = masterKey.derive(NETWORKS[2]);
+    const address = account.toAddress();
+    const estimate = await account.estimateMaxTransfer(address);
+    const tx = await account.createTransaction(address, estimate);
+    const hash = await account.sendTransaction(tx);
+    expect(hash).to.equal(null);
+  });
+
+  it(`should be create a valid tx ${NETWORKS[3].name}`, async () => {
+    const account = masterKey.derive(NETWORKS[3]);
+    const address = 'TRSiWBFYdJtNRqB1q2JZb33EMMw1fVkQRa';
+    const tx = await account.createTransaction(address, 0.01);
+    const hash = await account.sendTransaction(tx);
+    expect(hash).to.be.a('string');
+  });
 });
