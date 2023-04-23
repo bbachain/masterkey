@@ -41,7 +41,9 @@ export class AccountTRX extends AccountETH {
   public async sendTransaction(tx: any) {
     try {
       const signedRawTx = await this.tronWeb.trx.sign(tx, this.toPrivateKey());
-      const transaction = await this.tronWeb.trx.sendRawTransaction(signedRawTx);
+      const transaction = await this.tronWeb.trx.sendRawTransaction(
+        signedRawTx,
+      );
       return transaction && transaction.result ? transaction.txid : null;
     } catch (error) {
       console.log(error);

@@ -1,6 +1,6 @@
 import * as mocha from 'mocha';
 import * as chai from 'chai';
-import {NETWORKS, asignMasterKey} from '../src/index';
+import {GetAllsNetwork, asignMasterKey} from '../src/index';
 
 const expect = chai.expect;
 
@@ -13,26 +13,34 @@ describe('Should be valid address balance', async () => {
       'stick antique gadget enter build accident report session eagle exhibit pizza boost',
   } as any);
 
-  it(`should be a valid derive address ${NETWORKS[0].name}`, async () => {
-    const account = masterKey.derive(NETWORKS[0]);
+  it(`should be a valid derive address ${
+    GetAllsNetwork()[0].name
+  }`, async () => {
+    const account = masterKey.derive(GetAllsNetwork()[0]);
     const balance = await account.getBalance();
     expect(typeof balance).to.equal(typeof 1);
   });
 
-  it(`should be a valid derive address ${NETWORKS[1].name}`, async () => {
-    const account = masterKey.derive(NETWORKS[1]);
+  it(`should be a valid derive address ${
+    GetAllsNetwork()[1].name
+  }`, async () => {
+    const account = masterKey.derive(GetAllsNetwork()[1]);
     const balance = await account.getBalance();
     expect(typeof balance).to.equal(typeof 1);
   });
 
-  it(`should be a valid derive address ${NETWORKS[2].name}`, async () => {
-    const account = masterKey.derive(NETWORKS[2]);
+  it(`should be a valid derive address ${
+    GetAllsNetwork()[2].name
+  }`, async () => {
+    const account = masterKey.derive(GetAllsNetwork()[2]);
     const balance = await account.getBalance();
     expect(typeof balance).to.equal(typeof 1);
   });
 
-  it(`should be a valid derive address ${NETWORKS[3].name}`, async () => {
-    const account = masterKey.derive(NETWORKS[3]);
+  it(`should be a valid derive address ${
+    GetAllsNetwork()[3].name
+  }`, async () => {
+    const account = masterKey.derive(GetAllsNetwork()[3]);
     const balance = await account.getBalance();
     expect(typeof balance).to.equal(typeof 1);
   });
