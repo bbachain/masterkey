@@ -1,7 +1,7 @@
 {
-  "repositoryUrl": "git@github.com:BTI-Labs/prolibbti.git",
+  "repositoryUrl": "git@github.com:bbachain/masterkey.git",
   "preset": "conventionalcommits",
   "presetConfig": {
-    "issueUrlFormat": "{{host}}/{{owner}}/BTI-Labs/issues/{{id}}"
+    "issueUrlFormat": "{{host}}/{{owner}}/bbachain/masterkey/issues/{{id}}"
   }
 }
