@@ -4,7 +4,6 @@ import {BIP32Interface} from 'bip32';
 import Wallet from 'ethereumjs-wallet';
 
 import {IChainAccount} from '../types';
-import {ChainTransaction} from './ChainTransaction';
 
 export class AccountETH implements IChainAccount {
   base: number;
@@ -13,16 +12,20 @@ export class AccountETH implements IChainAccount {
   endpoint: string;
   wallet: Wallet;
   web3: Web3;
+  isTest: boolean;
 
-  constructor(xpub: BIP32Interface, xprv?: BIP32Interface) {
+  constructor(xpub: BIP32Interface, xprv: BIP32Interface, isTest: boolean) {
     this.base = 1e18;
     this.xpub = xpub;
     this.xprv = xprv;
     this.wallet = this.xprv
       ? Wallet.fromExtendedPrivateKey(this.xprv.toBase58())
       : Wallet.fromExtendedPublicKey(this.xpub.toBase58());
-    this.endpoint =
-      'https://goerli.infura.io/v3/e68e9eb0a4aa4c23840da2924a83b392';
+
+    this.isTest = isTest;
+    this.endpoint = isTest ?
+      'https://goerli.infura.io/v3/e68e9eb0a4aa4c23840da2924a83b392' :
+      'https://mainnet.infura.io/v3/e68e9eb0a4aa4c23840da2924a83b392';
     this.web3 = new Web3(new Web3.providers.HttpProvider(this.endpoint));
   }
 

@@ -22,16 +22,34 @@ export class Network implements INetwork {
   type: number;
 
   /**
+   * Network is test
+   */
+  isTest: boolean;
+
+  /**
    * The contructor of Network
    * @param name
    * @param symbol
    * @param decimal
    * @param type
    */
-  constructor(name: string, symbol: string, decimal: number, type: number) {
+  constructor({
+    name,
+    symbol,
+    decimal,
+    type,
+    isTest,
+  }: {
+    name: string,
+    symbol: string,
+    decimal: number,
+    type: number,
+    isTest: boolean,
+  }) {
     this.name = name;
     this.symbol = symbol;
     this.decimal = decimal;
     this.type = type;
+    this.isTest = isTest;
   }
 }

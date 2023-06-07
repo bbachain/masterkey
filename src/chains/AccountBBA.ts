@@ -9,7 +9,6 @@ import {
   Transaction,
   clusterApiUrl,
 } from '@bbachain/web3.js';
-import {ChainTransaction} from './ChainTransaction';
 import {IChainAccount} from '../types';
 
 export class AccountBBA implements IChainAccount {
@@ -18,13 +17,15 @@ export class AccountBBA implements IChainAccount {
   xprv?: BIP32Interface;
   connection: Connection;
   keypair: Keypair;
+  isTest: boolean;
 
-  constructor(xpub: BIP32Interface, xprv: BIP32Interface) {
+  constructor(xpub: BIP32Interface, xprv: BIP32Interface, isTest: boolean) {
     this.base = BBA_DALTON_UNIT;
     this.xpub = xpub;
     this.xprv = xprv;
+    this.isTest = isTest;
     this.connection = new Connection(
-      clusterApiUrl('testnet', true),
+      clusterApiUrl(this.isTest ? 'testnet' : 'mainnet', true),
       'confirmed',
     );
     this.keypair = Keypair.fromSeed(this.xprv.privateKey);
@@ -57,15 +58,15 @@ export class AccountBBA implements IChainAccount {
     const transactions = await this.connection.getTransactions(temp);
     return transactions.map(t => {
       return t;
-      return new ChainTransaction(
-        t.transaction.signatures[0],
-        t.transaction.signatures[0],
-        t.slot,
-        t.transaction.signatures[0],
-        t.transaction.signatures[0],
-        t.slot,
-        t.meta.fee,
-      );
+      // return new ChainTransaction(
+      //   t.transaction.signatures[0],
+      //   t.transaction.signatures[0],
+      //   t.slot,
+      //   t.transaction.signatures[0],
+      //   t.transaction.signatures[0],
+      //   t.slot,
+      //   t.meta.fee,
+      // );
     });
   }
 

@@ -5,10 +5,12 @@ import {AccountETH} from './AccountETH';
 export class AccountTRX extends AccountETH {
   tronWeb: any;
 
-  constructor(xpub: BIP32Interface, xprv?: BIP32Interface) {
-    super(xpub, xprv);
+  constructor(xpub: BIP32Interface, xprv: BIP32Interface, isTest: boolean) {
+    super(xpub, xprv, isTest);
     this.tronWeb = new TronWeb({
-      fullHost: 'https://api.shasta.trongrid.io',
+      fullHost: this.isTest ?
+        'https://api.shasta.trongrid.io' :
+        'https://api.trongrid.io',
     });
   }
 

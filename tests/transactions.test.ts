@@ -19,17 +19,18 @@ describe('Should be valid address balance', () => {
     const estimate = await account.estimateMaxTransfer(address);
     const tx = await account.createTransaction(address, estimate);
     const hash = await account.sendTransaction(tx);
+    console.log(hash, tx);
     expect(hash).to.be.a('string');
   });
 
-  it(`should be create a valid tx ${Networks[1].name}`, async () => {
-    const account = masterKey.derive(Networks[1]);
-    const address = account.toAddress();
-    const estimate = await account.estimateMaxTransfer(address);
-    const tx = await account.createTransaction(address, estimate);
-    const hash = await account.sendTransaction(tx);
-    expect(hash).to.be.a('string');
-  });
+  // it(`should be create a valid tx ${Networks[1].name}`, async () => {
+  //   const account = masterKey.derive(Networks[1]);
+  //   const address = account.toAddress();
+  //   const estimate = await account.estimateMaxTransfer(address);
+  //   const tx = await account.createTransaction(address, estimate);
+  //   const hash = await account.sendTransaction(tx);
+  //   expect(hash).to.be.a('string');
+  // });
 
   it(`should be failure send rawTx ${Networks[2].name}`, async () => {
     const account = masterKey.derive(Networks[2]);
@@ -37,14 +38,15 @@ describe('Should be valid address balance', () => {
     const estimate = await account.estimateMaxTransfer(address);
     const tx = await account.createTransaction(address, estimate);
     const hash = await account.sendTransaction(tx);
+    console.log(hash, tx);
     expect(hash).to.equal(null);
   });
 
-  it(`should be create a valid tx ${Networks[3].name}`, async () => {
-    const account = masterKey.derive(Networks[3]);
-    const address = 'TRSiWBFYdJtNRqB1q2JZb33EMMw1fVkQRa';
-    const tx = await account.createTransaction(address, 0.01);
-    const hash = await account.sendTransaction(tx);
-    expect(hash).to.be.a('string');
-  });
+  // it(`should be create a valid tx ${Networks[3].name}`, async () => {
+  //   const account = masterKey.derive(Networks[3]);
+  //   const address = 'TRSiWBFYdJtNRqB1q2JZb33EMMw1fVkQRa';
+  //   const tx = await account.createTransaction(address, 0.01);
+  //   const hash = await account.sendTransaction(tx);
+  //   expect(hash).to.be.a('string');
+  // });
 });

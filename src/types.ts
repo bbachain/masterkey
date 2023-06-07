@@ -7,6 +7,7 @@ export interface INetwork {
   symbol: string;
   decimal: number;
   type: number;
+  isTest: boolean;
 }
 
 export interface IMasterKey {
@@ -75,7 +76,7 @@ export interface IChainAccount {
 
   /**
    * Create raw transaction
-   * @returns ChainTransaction
+   * @returns any
    */
   createTransaction: (address: string, amount: number) => Promise<any>;
 
@@ -94,16 +95,6 @@ export interface IChainAccount {
    * @returns
    */
   sendTransaction: (transaction: any) => Promise<any>;
-}
-
-export interface IChainTransaction {
-  hash: string;
-  blockHash: string;
-  blockNumber: number;
-  destination: string;
-  source: string;
-  value: number;
-  fee: number;
 }
 
 export type TWordCount = 12 | 15 | 18 | 21 | 24;
