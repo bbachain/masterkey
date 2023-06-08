@@ -2720,7 +2720,7 @@ ethereumjs-wallet@^1.0.2:
     utf8 "^3.0.0"
     uuid "^8.3.2"
 
-ethers@^5.4.4:
+ethers@^5.7.2:
   version "5.7.2"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-5.7.2.tgz#3a7deeabbb8c030d4126b24f84e525466145872e"
   integrity sha512-wswUsmWo1aOK8rR7DIKiWSw9DbLWe6x98Jrn8wcTflTVvaXhAMaB5zGAXy0GYQEQp9iO1iSHWVyARQm11zUtyg==
@@ -6544,16 +6544,16 @@ trim-newlines@^3.0.0:
   integrity sha512-c1PTsA3tYrIsLGkJkzHF+w9F2EyxfXGo4UyJc4pFL++FMjnq0HJS69T3M7d//gKrFKwy429bouPescbjecU+Zw==
 
 tronweb@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/tronweb/-/tronweb-5.1.0.tgz#481d6bbc7449ed3f397879397b1427d5ddaa05dd"
-  integrity sha512-8a+mYKVUzsUWjeTHSAKcxAp82FseFTLlNLoLQ0KIL1rIt6Dy5whcyJwYatxUktbaztl55lnImHbupkKqMdIj1w==
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/tronweb/-/tronweb-5.2.0.tgz#3c1b12721176ce9e67d3af9922d7f7c375098142"
+  integrity sha512-DpGqCUjlh48R9+JB96is4Fy3itCzkYGijDhBot3eOYFUruR2KU/BCumhDZ+ofoNfCqHfCWXmw/ClBsG1ygtoxA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@tronweb3/google-protobuf" "^3.21.2"
     axios "^0.26.1"
     bignumber.js "^9.0.1"
     elliptic "^6.5.4"
-    ethers "^5.4.4"
+    ethers "^5.7.2"
     eventemitter3 "^3.1.0"
     injectpromise "^1.0.0"
     lodash "^4.17.21"
