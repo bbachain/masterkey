@@ -19,7 +19,6 @@ describe('Should be valid address balance', () => {
     const estimate = await account.estimateMaxTransfer(address);
     const tx = await account.createTransaction(address, estimate);
     const hash = await account.sendTransaction(tx);
-    console.log(hash, tx);
     expect(hash).to.be.a('string');
   });
 
@@ -38,7 +37,6 @@ describe('Should be valid address balance', () => {
     const estimate = await account.estimateMaxTransfer(address);
     const tx = await account.createTransaction(address, estimate);
     const hash = await account.sendTransaction(tx);
-    console.log(hash, tx);
     expect(hash).to.equal(null);
   });
 

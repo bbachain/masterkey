@@ -40,11 +40,11 @@ export class Network implements INetwork {
     type,
     isTest,
   }: {
-    name: string,
-    symbol: string,
-    decimal: number,
-    type: number,
-    isTest: boolean,
+    name: string;
+    symbol: string;
+    decimal: number;
+    type: number;
+    isTest: boolean;
   }) {
     this.name = name;
     this.symbol = symbol;

@@ -23,9 +23,9 @@ export class AccountETH implements IChainAccount {
       : Wallet.fromExtendedPublicKey(this.xpub.toBase58());
 
     this.isTest = isTest;
-    this.endpoint = isTest ?
-      'https://goerli.infura.io/v3/e68e9eb0a4aa4c23840da2924a83b392' :
-      'https://mainnet.infura.io/v3/e68e9eb0a4aa4c23840da2924a83b392';
+    this.endpoint = isTest
+      ? 'https://goerli.infura.io/v3/e68e9eb0a4aa4c23840da2924a83b392'
+      : 'https://mainnet.infura.io/v3/e68e9eb0a4aa4c23840da2924a83b392';
     this.web3 = new Web3(new Web3.providers.HttpProvider(this.endpoint));
   }
 

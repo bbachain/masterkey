@@ -11,16 +11,32 @@ export class Account {
     this.network = network;
     switch (this.network.symbol) {
       case 'BBA':
-        this.account = new AccountBBA(xprv.neutered(), xprv, this.network.isTest);
+        this.account = new AccountBBA(
+          xprv.neutered(),
+          xprv,
+          this.network.isTest,
+        );
         break;
       case 'BNB':
-        this.account = new AccountBSC(xprv.neutered(), xprv, this.network.isTest);
+        this.account = new AccountBSC(
+          xprv.neutered(),
+          xprv,
+          this.network.isTest,
+        );
         break;
       case 'ETH':
-        this.account = new AccountETH(xprv.neutered(), xprv, this.network.isTest);
+        this.account = new AccountETH(
+          xprv.neutered(),
+          xprv,
+          this.network.isTest,
+        );
         break;
       case 'TRX':
-        this.account = new AccountTRX(xprv.neutered(), xprv, this.network.isTest);
+        this.account = new AccountTRX(
+          xprv.neutered(),
+          xprv,
+          this.network.isTest,
+        );
         break;
       default:
         throw Error('Unsupport network');

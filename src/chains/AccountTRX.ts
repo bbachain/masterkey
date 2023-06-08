@@ -8,9 +8,9 @@ export class AccountTRX extends AccountETH {
   constructor(xpub: BIP32Interface, xprv: BIP32Interface, isTest: boolean) {
     super(xpub, xprv, isTest);
     this.tronWeb = new TronWeb({
-      fullHost: this.isTest ?
-        'https://api.shasta.trongrid.io' :
-        'https://api.trongrid.io',
+      fullHost: this.isTest
+        ? 'https://api.shasta.trongrid.io'
+        : 'https://api.trongrid.io',
     });
   }
 
