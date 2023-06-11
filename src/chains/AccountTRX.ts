@@ -3,7 +3,9 @@ import {BIP32Interface} from 'bip32';
 import {AccountETH} from './AccountETH';
 
 export class AccountTRX extends AccountETH {
+  // Addition Propeties
   tronWeb: any;
+  coingeckoId: string = 'tron';
 
   constructor(xpub: BIP32Interface, xprv: BIP32Interface, isTest: boolean) {
     super(xpub, xprv, isTest);

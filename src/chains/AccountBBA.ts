@@ -9,7 +9,7 @@ import {
   Transaction,
   clusterApiUrl,
 } from '@bbachain/web3.js';
-import {IChainAccount} from '../types';
+import {CoinGeckoCurrentPrice, IChainAccount} from '../types';
 
 export class AccountBBA implements IChainAccount {
   base: number;
@@ -37,6 +37,13 @@ export class AccountBBA implements IChainAccount {
 
   public toAddress() {
     return this.keypair.publicKey.toBase58();
+  }
+
+  public async getPrice() {
+    return {
+      eur: 0.19,
+      usd: 0.2,
+    } as CoinGeckoCurrentPrice;
   }
 
   public validateAddress(address: string) {

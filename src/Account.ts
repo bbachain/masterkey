@@ -51,6 +51,10 @@ export class Account {
     return this.account.toAddress();
   }
 
+  public getPrice() {
+    return this.account.getPrice();
+  }
+
   public validateAddress(address: string) {
     return this.account.validateAddress(address);
   }

@@ -3,6 +3,9 @@ import {AccountETH} from './AccountETH';
 import {BIP32Interface} from 'bip32';
 
 export class AccountBSC extends AccountETH {
+  // Addition Propeties
+  coingeckoId: string = 'binancecoin';
+
   constructor(xpub: BIP32Interface, xprv: BIP32Interface, isTest: boolean) {
     super(xpub, xprv, isTest);
     this.endpoint = this.isTest

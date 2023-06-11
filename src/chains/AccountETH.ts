@@ -2,8 +2,13 @@ import Web3 from 'web3';
 import {subtract} from 'lodash';
 import {BIP32Interface} from 'bip32';
 import Wallet from 'ethereumjs-wallet';
+import axios from 'axios';
 
-import {IChainAccount} from '../types';
+import {
+  // CoinGeckoCurrentPrice,
+  CoinGeckoResponse,
+  IChainAccount,
+} from '../types';
 
 export class AccountETH implements IChainAccount {
   base: number;
@@ -13,6 +18,9 @@ export class AccountETH implements IChainAccount {
   wallet: Wallet;
   web3: Web3;
   isTest: boolean;
+
+  // Addition Propeties
+  coingeckoId: string = 'ethereum';
 
   constructor(xpub: BIP32Interface, xprv: BIP32Interface, isTest: boolean) {
     this.base = 1e18;
@@ -35,6 +43,23 @@ export class AccountETH implements IChainAccount {
 
   public toAddress() {
     return this.wallet.getChecksumAddressString();
+  }
+
+  public async getPrice() {
+    try {
+      const {data, status} = await axios.get<CoinGeckoResponse>(
+        `https://api.coingecko.com/api/v3/coins/${this.coingeckoId}`,
+        {
+          headers: {
+            Accept: 'application/json',
+          },
+        },
+      );
+
+      return data.market_data.current_price;
+    } catch (error) {
+      throw error;
+    }
   }
 
   public validateAddress(address: string) {

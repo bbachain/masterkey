@@ -58,6 +58,11 @@ export interface IChainAccount {
   toAddress: () => string;
 
   /**
+   * Get account address
+   */
+  getPrice: () => Promise<CoinGeckoCurrentPrice>;
+
+  /**
    * Validate address
    */
   validateAddress: (address: string) => boolean;
@@ -98,3 +103,16 @@ export interface IChainAccount {
 }
 
 export type TWordCount = 12 | 15 | 18 | 21 | 24;
+
+export type CoinGeckoCurrentPrice = {
+  eur: number;
+  usd: number;
+};
+
+export type CoinGeckoMarketData = {
+  current_price: CoinGeckoCurrentPrice;
+};
+
+export type CoinGeckoResponse = {
+  market_data: CoinGeckoMarketData;
+};
