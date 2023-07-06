@@ -6567,9 +6567,9 @@ trim-newlines@^3.0.0:
   integrity sha512-c1PTsA3tYrIsLGkJkzHF+w9F2EyxfXGo4UyJc4pFL++FMjnq0HJS69T3M7d//gKrFKwy429bouPescbjecU+Zw==
 
 tronweb@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/tronweb/-/tronweb-5.1.0.tgz#481d6bbc7449ed3f397879397b1427d5ddaa05dd"
-  integrity sha512-8a+mYKVUzsUWjeTHSAKcxAp82FseFTLlNLoLQ0KIL1rIt6Dy5whcyJwYatxUktbaztl55lnImHbupkKqMdIj1w==
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/tronweb/-/tronweb-5.1.1.tgz#ab19105a37208ec261bb67ae2053d8799443682d"
+  integrity sha512-/s7VZRIybbY5Y6n5CBhwaW49IO6GEvvreiQ7JTM9+ZjrsTVtaSJrwschfjEwoHl7ZmF21XXjHbs77k0kVo+OlQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@tronweb3/google-protobuf" "^3.21.2"
