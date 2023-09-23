@@ -27,3 +27,4 @@ npm install @bbachain/masterkey
 // With yarn
 yarn add @bbachain/masterkey
 ```
+## Build from source
