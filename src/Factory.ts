@@ -1,9 +1,14 @@
 import * as bip39 from 'bip39';
+import * as ecc from 'tiny-secp256k1';
+import BIP32Factory, {BIP32Interface} from 'bip32';
 import {v4 as uuid} from 'uuid';
 
 import {MasterKey} from './MasterKey';
 import {wordsCountToStrength} from './utils';
-import {IMasterKey} from './types';
+import {IMasterKey, INetwork} from './types';
+import {Account} from './Account';
+
+const bip32 = BIP32Factory(ecc);
 
 /**
  * Create a new masterkey
@@ -29,4 +34,19 @@ export const recovery = async (name: string, mnemonic: string) => {
 
 export const asignMasterKey = (obj: IMasterKey) => {
   return new MasterKey(obj.id, obj.name, obj.mnemonic, obj.seed);
+};
+
+export const builder = async ({
+  mnemonic,
+  network,
+  index = 0,
+}: {
+  mnemonic: string;
+  network: INetwork;
+  index?: number;
+}) => {
+  const path = `m/44'/${network.type}'/0'/0/${index}`;
+  const seed = await bip39.mnemonicToSeed(mnemonic);
+  const root: BIP32Interface = bip32.fromSeed(seed);
+  return new Account(network, root.derivePath(path));
 };
